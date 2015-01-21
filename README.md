@@ -1,7 +1,7 @@
 # Running-codes
 How you should run your jobs. 
 
-# Level of Scale up
+# Levels of Scale up
 
 ## Running on HPC Cluster
 If you want many process in your application to run parallel, HPC clusters are for you. 
