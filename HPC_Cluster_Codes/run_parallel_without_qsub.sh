@@ -1,26 +1,35 @@
 #!/bin/bash
 
-FAIL=0
-
 echo "starting"
 
-for i in [1..4]
+code_file="$1"
+args_file="$2"
+while read -r line
 do
-bash code.$i.sh &
-done
+    myargs=$line
+    arrIN=(${myargs//;/ })
+    #echo ${arrIN[0]}
+    #echo ${arrIN[1]}
+    bash $code_file ${arrIN[0]} ${arrIN[1]} &
+done < "$args_file"
 
 
+counter=1
+#failed_jobids
+Failed=""
+seperator=" "
 for job in `jobs -p`
 do
 echo $job
-    wait $job || let "FAIL+=1"
+    wait $job || Failed=$Failed$seperator$counter$seperator
+    #;echo "Part "+counter+" Failed."
+    counter=$((counter+1))
 done
 
-echo $FAIL
 
-if [ "$FAIL" == "0" ];
+if [ "$Failed" == "" ];
 then
 echo "YAY!"
 else
-echo "FAIL! ($FAIL)"
+echo "FAIL! in these rows ($Failed)"
 fi
