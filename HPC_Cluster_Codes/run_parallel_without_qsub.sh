@@ -10,7 +10,7 @@ do
     arrIN=(${myargs//;/ })
     #echo ${arrIN[0]}
     #echo ${arrIN[1]}
-    bash $code_file ${arrIN[0]} ${arrIN[1]} &
+    bash $code_file ${arrIN[0]} ${arrIN[1]} ${arrIN[2]} &
 done < "$args_file"
 
 
